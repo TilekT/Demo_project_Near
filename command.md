@@ -17,29 +17,26 @@ or run ./scripts/build.sh instead of 4,5
 
 *************************************************
 
-near view dev-1622125962236-5124564 sayHi
+near view dev-1645348898006-52720569179472 hello
 
-near call dev-1622125962236-5124564 greetingUser --account_id lobana.testnet 
+near call dev-1645348898006-52720569179472 greetingUser --account_id tilek.testnet 
 
-near call dev-1622125962236-5124564 showMyTasks --account_id lobana.testnet 
+near call dev-1645348898006-52720569179472 showMyQuestions --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 showMyAnswers --account_id tilek.testnet 
 
-near call dev-1622125962236-5124564 addToMyList '{"task":""}' --account_id lobana.testnet
+near call dev-1645348898006-52720569179472 addQuestion '{"question":"What is a sharding?"}' --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 addQuestion '{"question":"What is WEB 3?"}' --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 addAnswer '{"answer":"Sharding does a horizontal partition of your database and turns into smaller, more manageable tables."}' --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 addAnswer '{"answer":"Web 3.0 is a general idea for a decentralized Internet based on public blockchains"}' --account_id tilek.testnet
 
-near call dev-1622125962236-5124564 addToMyList '{"task":"wake up"}' --account_id lobana.testnet
+near call dev-1645348898006-52720569179472 deleteQuestion '{"question":1}' --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 deleteAnswer '{"answer":1}' --account_id tilek.testnet
 
-near call dev-1622125962236-5124564 addToMyList '{"task":"at 7 am"}' --account_id lobana.testnet
+near call dev-1645348898006-52720569179472 showMyQuestions --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 showMyAnswers --account_id tilek.testnet 
 
-near call dev-1622125962236-5124564 addToMyList '{"task":"Go For shopping"}' --account_id lobana.testnet
-
-near call dev-1622125962236-5124564 addToMyList '{"task":"coding"}' --account_id lobana.testnet
-
-near call dev-1622125962236-5124564 showMyTasks --account_id lobana.testnet 
-
-near call dev-1622125962236-5124564 deleteTask '{"task":1}' --account_id lobana.testnet
-
-near call dev-1622125962236-5124564 showMyTasks --account_id lobana.testnet 
-
-near call dev-1622125962236-5124564 getNumTasks --account_id lobana.testnet 
+near call dev-1645348898006-52720569179472 getNumQuestions --account_id tilek.testnet
+near call dev-1645348898006-52720569179472 getNumAnswers --account_id tilek.testnet 
 
 
 

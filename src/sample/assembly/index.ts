@@ -1,81 +1,91 @@
-import { 
-  context,
-  logging,
-  PersistentVector 
-} from "near-sdk-as";
+import {context,logging,PersistentVector} from "near-sdk-as";
 
-//print hi without context.sender so need view
-export function sayHi(): bool {
-   logging.log("HIIIIIIIIIII");
+//view method
+export function hello(): bool {
+   logging.log("Hi, there! Lets write a first smart contract on NEAR!");
    return true;
 }
 
-//print hi with context.sender so need call
+//call method with context.sender
 export function greetingUser(): string {
-  return "Hello " + context.sender + " !";
+  return "Now " + context.sender + " its time to create a NEAR questionnaire!";
 }
 
-//listTODO 'task' 
-let tasks = new PersistentVector<string>('task');
+//'questions' 
+let questions = new PersistentVector<string>('question');
+//'answers' 
+let answers = new PersistentVector<string>('answer');
 
-//add a new task to tasklist
-export function addToMyList(task: string): string {
-  assert(task.length > 0, "Task can not be blank.");
-  tasks.push(task);
-  return task.toString() + " task is ADDED";
+//add a new question to questionnaire
+export function addQuestion(question: string): string {
+  assert(question.length > 0, "question can not be blank");
+  questions.push(question);
+  return question.toString() + " new question was ADDED";
 }
 
-//to show all my tasks return
-export function showMyTasks(): Array<string> {
+//to show all questions
+export function showMyQuestions(): Array<string> {
   let listToPrint = new Array<string>();
   let i: i32 = 0;
-  if(tasks.length == 0){
-    listToPrint.push("Dear " + context.sender + " All tasks DONE!")
+  if(questions.length == 0){
+    listToPrint.push("Dear " + context.sender + " there is no questions right now, please add some!")
   }
-  while (i < tasks.length) {
-    listToPrint.push(tasks[i])
+  while (i < questions.length) {
+    listToPrint.push(questions[i])
     i++
   }
   return listToPrint;
 }
 
-export function deleteTask(task: i32): string {
-   // const taskToDelete: string = tasks.replace(task - 1, "");
-   // tasks.replace(task - 1, taskToDelete + "  .... DELETED");
-   if(tasks.containsIndex(task - 1)){
-   tasks.swap_remove(task - 1);
-   return "The " + task.toString() + " task is DELETED";
+//remove a question from array
+export function deleteQuestion(question: i32): string {
+   if(questions.containsIndex(question - 1)){
+    questions.swap_remove(question - 1);
+   return "The " + question.toString() + " question was DELETED";
  }
- return "There is No tasks to delete";
+ return "There is No questions to delete";
 }
 
-export function getNumTasks(): String {
-  return "Hello "+ context.sender +  ", You have " + tasks.length.toString()
-    + " tasks for today!";
+//get the number of questions
+export function getNumQuestions(): String {
+  return "Hello "+ context.sender +  ", there is " + questions.length.toString()
+    + " questions for today!";
 
 }
 
+//add a new answer
+export function addAnswer(answer: string): string {
+  assert(answer.length > 0, "answer can not be blank");
+  answers.push(answer);
+  return answer.toString() + " new answer was ADDED";
+}
 
-// export function clearTasks(): string {
-//   let i: i32 = 0;
-//   logging.log(tasks.length);
+//to show all answers
+export function showMyAnswers(): Array<string> {
+  let listToPrint = new Array<string>();
+  let i: i32 = 0;
+  if(answers.length == 0){
+    listToPrint.push("Dear " + context.sender + " there is no answers right now, please add some!")
+  }
+  while (i < answers.length) {
+    listToPrint.push(answers[i])
+    i++
+  }
+  return listToPrint;
+}
 
-//   while (i < tasks.length) {
-//     tasks.popBack();
-//     logging.log(i);
-//     i++
-//   }
-//   return context.sender +  " All your TASKS is DELETED";
+//remove an answer from array
+export function deleteAnswer(answer: i32): string {
+  if(answers.containsIndex(answer - 1)){
+   answers.swap_remove(answer - 1);
+  return "The " + answer.toString() + " answer was DELETED";
+}
+return "There is No answers to delete";
+}
 
-// }
+//get the number of answers
+export function getNumAnswers(): String {
+  return "Hello "+ context.sender +  ", there is " + answers.length.toString()
+    + " answers for today!";
 
-
-export class Task {
-  taskText: string = 'new task';
-  done: boolean = true;
-  constructor(taskText: string, done: bool) {
-    taskText = this.taskText;
-    done = this.done; 
-   }
- }
- 
+}

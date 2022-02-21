@@ -12,6 +12,7 @@
 
 
 or run ./scripts/build.sh instead of 4,5
+or run ./scripts/full.sh to see all view/change methods
 
 
 
